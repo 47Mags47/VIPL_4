@@ -14,6 +14,8 @@ class LocalSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $this->call(Local\WriterSeeder::class);
+        $this->call(Local\BankContractSeeder::class);
+        $this->call(Local\BankSeeder::class);
     }
 }

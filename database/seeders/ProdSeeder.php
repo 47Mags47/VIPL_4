@@ -14,6 +14,6 @@ class ProdSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $this->call(Prod\WriterTypeSeeder::class);
     }
 }
