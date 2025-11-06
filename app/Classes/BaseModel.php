@@ -16,4 +16,8 @@ abstract class BaseModel extends Model
     {
         return with(new static)->getTable();
     }
+
+    public static function getResource(){
+        return self::paginate(50)->toResourceCollection();
+    }
 }

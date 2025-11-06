@@ -4,11 +4,12 @@ namespace App\Models;
 
 use App\Classes\BaseModel;
 use App\Traits\HasCode;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Bank extends BaseModel
 {
-    use HasCode;
+    use HasCode, HasFactory;
 
     ### Настройки
     ##################################################
