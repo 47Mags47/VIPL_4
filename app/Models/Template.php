@@ -3,21 +3,16 @@
 namespace App\Models;
 
 use App\Classes\BaseModel;
-use App\Traits\HasCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Writer extends BaseModel
+class Template extends BaseModel
 {
-    use HasFactory, HasCode;
+    use HasFactory;
 
     ### Настройки
     ##################################################
     protected $fillable = [
-        'code',
-        'name',
-        'class',
-        'type_id',
+        'content',
     ];
 
     ### Методы
@@ -26,8 +21,5 @@ class Writer extends BaseModel
 
     ### Связи
     ##################################################
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(WriterType::class, 'type_id');
-    }
+    //
 }

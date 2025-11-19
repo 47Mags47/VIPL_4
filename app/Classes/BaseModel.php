@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseModel extends Model
 {
-    ### Настройки
-    ##################################################
-    protected $guarded = [];
-
     ### Методы
     ##################################################
     public static function getTableName()
@@ -17,7 +13,17 @@ abstract class BaseModel extends Model
         return with(new static)->getTable();
     }
 
-    public static function getResource(){
+    public static function getResource()
+    {
         return self::paginate(50)->toResourceCollection();
+    }
+
+    public static function findFromArray(array $array)
+    {
+        return self::where(function ($query) use ($array) {
+            foreach ($array as $column => $value) {
+                $query->where($column, $value);
+            }
+        })->get();
     }
 }

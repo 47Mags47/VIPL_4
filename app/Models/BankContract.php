@@ -12,6 +12,12 @@ class BankContract extends BaseModel
 
     ### Настройки
     ##################################################
+    protected $fillable = [
+        'number',
+        'signed_at',
+        'writer_id',
+    ];
+
     protected function casts(): array
     {
         return [

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\BankController;
-use App\Http\Controllers\WriterController;
 use Illuminate\Support\Facades\Route;
 
-Route::apiResource('banks', BankController::class);
-Route::apiResource('writers', WriterController::class);
+Route::apiResource('banks',             \App\Http\Controllers\BankController::class);
+Route::apiResource('bank-contracts',    \App\Http\Controllers\BankContractController::class);
+Route::apiResource('writers',           \App\Http\Controllers\WriterController::class);
+Route::apiResource('templates',         \App\Http\Controllers\TemplateController::class);

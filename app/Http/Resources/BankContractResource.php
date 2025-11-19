@@ -17,8 +17,8 @@ class BankContractResource extends JsonResource
         return [
             'id' => $this->id,
             'number' => $this->number,
-            'signed' => $this->signed_at,
-            'writer' => $this->writer->toResource()
+            'signed' => $this->signed_at->toISOString(),
+            'writer' => $this->writer->toResource()->jsonSerialize(),
         ];
     }
 }

@@ -20,7 +20,7 @@ class BankContractFactory extends Factory
     {
         return [
             'number' => Str::random(rand(3, 15)),
-            'signed_at' => now()->subDays(rand(0, 365)),
+            'signed_at' => now()->subDays(rand(0, 365))->toISOString(),
             'writer_id' => Writer::count() > 0 ? Writer::all()->random()->id : Writer::factory()->create()->id,
         ];
     }

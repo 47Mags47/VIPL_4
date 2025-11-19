@@ -2,57 +2,16 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Http\Controllers\WriterController;
 use App\Models\Writer;
-use Tests\TestCase;
+use Tests\Cases\Http\Controllers\APIControllerTestCase;
 
-class WriterControllerTest extends TestCase
+class WriterControllerTest extends APIControllerTestCase
 {
-    public function test_writers_index(): void
-    {
-        $writer = Writer::factory()->create();
+    public string $controllerType = parent::API_CONTROLLER;
 
-        $this->getJson(route('writers.index'))
-            ->assertOk()
-            ->assertJson([
-                'data' => [$writer->toResource()->jsonSerialize()]
-            ]);
-    }
-
-    public function test_writers_create(): void
-    {
-        $model = Writer::factory()->make();
-        $payload = $model->getAttributes();
-
-        $response = $this->postJson(route('writers.store'), $payload)
-            ->assertCreated();
-
-        $this->assertDatabaseHas(Writer::getTableName(), $model->toArray());
-
-        $writer = Writer::find($payload)->first();
-        $response->assertJson([
-            'data' => $writer->toResource()->jsonSerialize()
-        ]);
-    }
-
-    public function test_writers_update(): void
-    {
-        $writer = Writer::factory()->create();
-        $payload = Writer::factory()->make()->toArray();
-
-        $this->putJson(route('writers.update', ['writer' => $writer->id]), $payload)
-            ->assertOk()
-            ->assertJson(['data' => $writer->refresh()->toResource()->jsonSerialize()]);
-
-        $this->assertDatabaseHas(Writer::getTableName(), $payload);
-    }
-
-    public function test_writers_delete(): void
-    {
-        $writer = Writer::factory()->create();
-
-        $this->deleteJson(route('writers.destroy', ['writer' => $writer->id]))
-            ->assertOk();
-
-        $this->assertDatabaseMissing(Writer::getTableName(), $writer->toArray());
-    }
+    public string $controller = WriterController::class;
+    public string $model = Writer::class;
+    public string $route = 'writers';
+    public string $payload_key = 'writer';
 }

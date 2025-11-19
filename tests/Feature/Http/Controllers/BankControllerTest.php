@@ -2,57 +2,16 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Http\Controllers\BankController;
 use App\Models\Bank;
-use Tests\TestCase;
+use Tests\Cases\Http\Controllers\APIControllerTestCase;
 
-class BankControllerTest extends TestCase
+class BankControllerTest extends APIControllerTestCase
 {
-    public function test_banks_index(): void
-    {
-        $bank = Bank::factory()->create();
+    public string $controllerType = parent::API_CONTROLLER;
 
-        $this->getJson(route('banks.index'))
-            ->assertOk()
-            ->assertJson([
-                'data' => [$bank->toResource()->jsonSerialize()]
-            ]);
-    }
-
-    public function test_banks_create(): void
-    {
-        $model = Bank::factory()->make();
-        $payload = $model->getAttributes();
-
-        $response = $this->postJson(route('banks.store'), $payload)
-            ->assertCreated();
-
-        $this->assertDatabaseHas(Bank::getTableName(), $model->toArray());
-
-        $bank = Bank::find($payload)->first();
-        $response->assertJson([
-            'data' => $bank->toResource()->jsonSerialize()
-        ]);
-    }
-
-    public function test_banks_update(): void
-    {
-        $bank = Bank::factory()->create();
-        $payload = Bank::factory()->make()->toArray();
-
-        $this->putJson(route('banks.update', ['bank' => $bank->id]), $payload)
-            ->assertOk()
-            ->assertJson(['data' => $bank->refresh()->toResource()->jsonSerialize()]);
-
-        $this->assertDatabaseHas(Bank::getTableName(), $payload);
-    }
-
-    public function test_banks_delete(): void
-    {
-        $bank = Bank::factory()->create();
-
-        $this->deleteJson(route('banks.destroy', ['bank' => $bank->id]))
-            ->assertOk();
-
-        $this->assertDatabaseMissing(Bank::getTableName(), $bank->toArray());
-    }
+    public string $controller = BankController::class;
+    public string $model = Bank::class;
+    public string $route = 'banks';
+    public string $payload_key = 'bank';
 }

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WriterResource extends JsonResource
+class TemplateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,14 +15,7 @@ class WriterResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'code' => $this->code,
-            'name' => $this->name,
-            'class' => $this->class,
-            'type' => [
-                'code' => $this->type->code,
-                'name' => $this->type->name,
-            ],
+            'content' => $this->content
         ];
     }
 }

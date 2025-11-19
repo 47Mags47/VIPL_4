@@ -20,5 +20,6 @@ class LocalSeeder extends Seeder
         $this->call(Local\DivisionSeeder::class);
         $this->call(Local\UserSeeder::class);
         $this->call(Local\PaymentSeeder::class);
+        $this->call(Local\TemplateSeeder::class);
     }
 }
