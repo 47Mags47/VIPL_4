@@ -3,9 +3,9 @@
 namespace Tests\Cases\Http\Controllers;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Tests\TestCase;
 
-abstract class ControllerTestCase extends BaseTestCase
+abstract class ControllerTestCase extends TestCase
 {
     use
         RefreshDatabase;

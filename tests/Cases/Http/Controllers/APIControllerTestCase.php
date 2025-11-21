@@ -19,6 +19,7 @@ abstract class APIControllerTestCase extends ControllerTestCase
     public string $route;
     public string $payload_key;
 
+    public array $payload = [];
     public array $methods = [
         'index',
         'store',

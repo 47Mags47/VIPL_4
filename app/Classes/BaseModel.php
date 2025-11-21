@@ -22,7 +22,8 @@ abstract class BaseModel extends Model
     {
         return self::where(function ($query) use ($array) {
             foreach ($array as $column => $value) {
-                $query->where($column, $value);
+                if (!in_array($column, new static()->getHidden()) and in_array($column, new static()->getFillable()))
+                    $query->where($column, $value);
             }
         })->get();
     }

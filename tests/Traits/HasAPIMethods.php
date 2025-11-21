@@ -9,7 +9,7 @@ trait HasAPIMethods
         $can_has_method = in_array($method, $this->methods);
         $has_method = method_exists($this->controller, $method);
 
-        $this->assertTrue($can_has_method && $has_method);
+        $this->assertTrue(($can_has_method && $has_method) or (!$can_has_method && !$has_method));
     }
 
     public function test_controller_has_method_index(): void
