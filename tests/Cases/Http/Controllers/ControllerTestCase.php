@@ -17,9 +17,6 @@ abstract class ControllerTestCase extends BaseTestCase
 
     public string $controllerType = 'web';
     public string $controller;
-    public string $model;
-    public string $route;
-    public string $payload_key;
     public array $methods;
 
     public function method_is_used(string $method): void
