@@ -18,7 +18,6 @@ class DivisionFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => Str::random(rand(3,7)),
             'name' => $this->faker->company(),
         ];
     }

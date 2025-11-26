@@ -16,7 +16,7 @@ class PaymentFactory extends Factory
      */
     public function definition(): array
     {
-        $code = $this->faker->unique()->numerify('0##');
+        $code = $this->faker->unique()->numerify('###');
 
         return [
             'code' => $code,
