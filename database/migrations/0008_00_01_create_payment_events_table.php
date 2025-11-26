@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Writer;
+use App\Models\Payment;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bank_contracts', function (Blueprint $table) {
+        Schema::create('payment_events', function (Blueprint $table) {
             $table->id();
 
-            $table->string('number');
-            $table->date('signed_at');
-
-            $table->foreignId('writer_id')->constrained(Writer::getTableName());
+            $table->date('date');
+            $table->foreignId('payment_id')->constrained(Payment::getTableName());
 
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bank_contracts');
+        Schema::dropIfExists('payment_events');
     }
 };

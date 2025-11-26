@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BankContractResource extends JsonResource
+class PaymentEventResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,12 @@ class BankContractResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'number' => $this->number,
-            'signed' => $this->signed_at->format('Y-m-d'),
-            'writer' => $this->writer->toResource()->jsonSerialize(),
+            'date' => $this->date->format('Y-m-d'),
+            'payment' => [
+                'code' => $this->payment->code,
+                'name' => $this->payment->name,
+                'kbk' => $this->payment->kbk,
+            ]
         ];
     }
 }

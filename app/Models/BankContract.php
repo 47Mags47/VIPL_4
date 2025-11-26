@@ -21,7 +21,7 @@ class BankContract extends BaseModel
     protected function casts(): array
     {
         return [
-            'signed_at' => 'datetime',
+            'signed_at' => 'datetime:Y-m-d',
         ];
     }
 

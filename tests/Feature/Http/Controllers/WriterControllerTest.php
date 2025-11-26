@@ -4,14 +4,12 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Http\Controllers\WriterController;
 use App\Models\Writer;
-use Tests\Cases\Http\Controllers\APIControllerTestCase;
+use Tests\Cases\APIControllerCase;
 
-class WriterControllerTest extends APIControllerTestCase
+class WriterControllerTest extends APIControllerCase
 {
-    public string $controllerType = parent::API_CONTROLLER;
-
-    public string $controller = WriterController::class;
-    public string $model = Writer::class;
-    public string $route = 'writers';
-    public string $payload_key = 'writer';
+    public $controller = WriterController::class;
+    public $routeName = 'writers';
+    public $model = Writer::class;
+    public $payload_key = 'writer';
 }

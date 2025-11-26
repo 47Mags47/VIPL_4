@@ -5,18 +5,16 @@ namespace Tests\Feature\Http\Controllers;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Tests\Cases\Http\Controllers\APIControllerTestCase;
+use Tests\Cases\APIControllerCase;
 
-class UserControllerTest extends APIControllerTestCase
+class UserControllerTest extends APIControllerCase
 {
-    public string $controllerType = parent::API_CONTROLLER;
+    public $controller = UserController::class;
+    public $routeName = 'users';
+    public $model = User::class;
+    public $payload_key = 'user';
 
-    public string $controller = UserController::class;
-    public string $model = User::class;
-    public string $route = 'users';
-    public string $payload_key = 'user';
-
-    public array $methods = [
+    public $methods = [
         'store',
         'show',
         'update',
@@ -27,7 +25,7 @@ class UserControllerTest extends APIControllerTestCase
     {
         parent::setUp();
 
-        $user = User::factory(['password' => Hash::make('test')])->make();
+        $user = User::factory()->make(['password' => Hash::make('test')]);
 
         $this->payload = [
             'store' => array_merge($user->getAttributes(), [

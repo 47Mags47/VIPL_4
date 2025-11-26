@@ -15,7 +15,13 @@ abstract class BaseModel extends Model
 
     public static function getResource()
     {
-        return self::paginate(50)->toResourceCollection();
+        $query = self::query();
+
+        $data = (request()->has('paginate') && request()->boolean('paginate'))
+            ? $query->paginate(request()->input('paginate'))
+            : $query->get();
+
+        return $data->toResourceCollection();
     }
 
     public static function findFromArray(array $array)

@@ -4,13 +4,15 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Http\Controllers\SessionController;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
-use Tests\Cases\Http\Controllers\ControllerTestCase;
+use Tests\TestCase;
 
-class SessionControllerTest extends ControllerTestCase
+class SessionControllerTest extends TestCase
 {
-    use WithFaker;
+    use WithFaker, RefreshDatabase;
+    protected $seed = true;
 
     public array $methods = [
         'store',

@@ -4,13 +4,12 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Http\Controllers\BankContractController;
 use App\Models\BankContract;
-use Tests\Cases\Http\Controllers\APIControllerTestCase;
+use Tests\Cases\APIControllerCase;
 
-class BankContractControllerTest extends APIControllerTestCase
+class BankContractControllerTest extends APIControllerCase
 {
-    public string $controllerType = parent::API_CONTROLLER;
-    public string $controller = BankContractController::class;
-    public string $model = BankContract::class;
-    public string $route = 'bank-contracts';
-    public string $payload_key = 'bank_contract';
+    public $controller = BankContractController::class;
+    public $routeName = 'bank-contracts';
+    public $model = BankContract::class;
+    public $payload_key = 'bank_contract';
 }

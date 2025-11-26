@@ -10,3 +10,4 @@ Route::apiResource('bank-contracts',    \App\Http\Controllers\BankContractContro
 Route::apiResource('writers',           \App\Http\Controllers\WriterController::class);
 Route::apiResource('templates',         \App\Http\Controllers\TemplateController::class);
 Route::apiResource('users',             \App\Http\Controllers\UserController::class)->except('index');
+Route::apiResource('payment-events',    \App\Http\Controllers\PaymentEventController::class);

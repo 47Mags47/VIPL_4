@@ -21,5 +21,6 @@ class LocalSeeder extends Seeder
         $this->call(Local\UserSeeder::class);
         $this->call(Local\PaymentSeeder::class);
         $this->call(Local\TemplateSeeder::class);
+        $this->call(Local\PaymentEventSeeder::class);
     }
 }
