@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Division;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,5 +31,12 @@ class UserFactory extends Factory
             'email_verified_at' => now()->subDay(rand(1, 364)),
             'deleted_at'        => rand(0, 10) === 10 ? now() : null
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->divisions()->attach(Division::factory()->create());
+        });
     }
 }

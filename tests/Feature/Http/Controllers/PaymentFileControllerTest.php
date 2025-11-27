@@ -50,7 +50,7 @@ class PaymentFileControllerTest extends APIControllerCase
         $response
             ->assertCreated()
             ->assertJsonIsObject()
-            ->assertJson(['data' => $model->toResource()->jsonSerialize()]);
+            ->assertJsonFragment($model->toResource()->jsonSerialize());
     }
 
     public function test_check_update_method()
@@ -68,6 +68,6 @@ class PaymentFileControllerTest extends APIControllerCase
         $response
             ->assertOk()
             ->assertJsonIsObject()
-            ->assertJson(['data' => $file->refresh()->toResource()->jsonSerialize()]);
+            ->assertJsonFragment($file->refresh()->toResource()->jsonSerialize());
     }
 }

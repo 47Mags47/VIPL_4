@@ -9,16 +9,14 @@ class SessionController
 {
     public function store(StoreSessionRequest $request)
     {
-        if (Auth::attempt($request->only(['email', 'password']), $request->input('remember') ?? false)) {
-            // $request->session()->regenerate();
-
+        if (Auth::attempt($request->only(['email', 'password']), $request->input('remember') ?? false))
             return user()->toResource();
-        }
 
         return back()->withErrors(['email' => 'Неверный логин или пароль'])->onlyInput('email');
     }
 
-    public function destroy(){
+    public function destroy()
+    {
         Auth::logout();
 
         session()->invalidate();

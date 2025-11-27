@@ -10,7 +10,11 @@ class UserController
 {
     public function store(StoreUserRequest $request)
     {
-        return User::create($request->validated())->toResource();
+        $user = User::create($request->validated());
+
+        $user->divisions()->attach($request->input('division_id'));
+
+        return $user->toResource();
     }
 
     public function show(User $user){

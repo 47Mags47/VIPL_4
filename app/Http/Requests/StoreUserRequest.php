@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Division;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserRequest extends FormRequest
@@ -20,6 +21,8 @@ class StoreUserRequest extends FormRequest
 
             'email' => ['required', 'email'],
             'password' => ['required', 'string', 'confirmed', 'min:4', 'max:255'],
+
+            'division_id' => ['required', 'exists:' . Division::class . ',id']
         ];
     }
 }

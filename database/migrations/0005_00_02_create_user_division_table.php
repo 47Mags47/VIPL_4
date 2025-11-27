@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_to_division', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(User::getTableName());
-            $table->foreignId('division_id')->constrained(Division::getTableName());
+            $table->foreignId('user_id')->constrained(User::getTableName())->cascadeOnDelete();
+            $table->foreignId('division_id')->constrained(Division::getTableName())->cascadeOnDelete();
         });
     }
 

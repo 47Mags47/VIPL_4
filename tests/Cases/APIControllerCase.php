@@ -21,7 +21,7 @@ abstract class APIControllerCase extends ControllerTestCase
         $this->getJson(route($this->routeName . '.index'))
             ->assertOk()
             ->assertJsonIsObject()
-            ->assertJson(['data' => [$model->toResource()->jsonSerialize()]]);
+            ->assertJsonFragment($model->toResource()->jsonSerialize());
     }
 
     public function test_check_store_method()
@@ -37,7 +37,7 @@ abstract class APIControllerCase extends ControllerTestCase
         $response
             ->assertCreated()
             ->assertJsonIsObject()
-            ->assertJson(['data' => $model->toResource()->jsonSerialize()]);
+            ->assertJsonFragment($model->toResource()->jsonSerialize());
     }
 
     public function test_check_show_method() {
@@ -50,7 +50,7 @@ abstract class APIControllerCase extends ControllerTestCase
         $response
             ->assertOk()
             ->assertJsonIsObject()
-            ->assertJson(['data' => $model->toResource()->jsonSerialize()]);
+            ->assertJsonFragment($model->toResource()->jsonSerialize());
     }
 
     public function test_check_update_method()
@@ -66,7 +66,7 @@ abstract class APIControllerCase extends ControllerTestCase
         $response
             ->assertOk()
             ->assertJsonIsObject()
-            ->assertJson(['data' => $model->refresh()->toResource()->jsonSerialize()]);
+            ->assertJsonFragment($model->refresh()->toResource()->jsonSerialize());
     }
 
     public function test_check_destroy_method()

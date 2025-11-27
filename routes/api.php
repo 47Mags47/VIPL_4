@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->post('/session',            [\App\Http\Controllers\SessionController::class, 'store'])->name('session.store');
-Route::middleware('auth')->delete('/session/destroy',   [\App\Http\Controllers\SessionController::class, 'destroy'])->name('session.destroy');
+Route::middleware('guest')->post('/session',                    [\App\Http\Controllers\SessionController::class, 'store'])->name('session.store');
+Route::middleware('auth')->delete('/session/destroy',           [\App\Http\Controllers\SessionController::class, 'destroy'])->name('session.destroy');
+
+Route::middleware('auth')->get('/session/user-divisions',       [\App\Http\Controllers\SessionUserDivisionController::class, 'index'])->name('session.user-division.index');
+Route::middleware('auth')->post('/session/user-divisions',      [\App\Http\Controllers\SessionUserDivisionController::class, 'store'])->name('session.user-division.store');
 
 Route::apiResource('banks',             \App\Http\Controllers\BankController::class);
 Route::apiResource('bank-contracts',    \App\Http\Controllers\BankContractController::class);

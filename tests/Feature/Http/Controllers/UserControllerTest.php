@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Http\Controllers\UserController;
+use App\Models\Division;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Tests\Cases\APIControllerCase;
@@ -31,6 +32,7 @@ class UserControllerTest extends APIControllerCase
             'store' => array_merge($user->getAttributes(), [
                 'password' => 'test',
                 'password_confirmation' => 'test',
+                'division_id' => Division::factory()->create()->id,
             ])
         ];
     }

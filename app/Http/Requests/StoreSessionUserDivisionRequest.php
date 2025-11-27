@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use App\Models\Division;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
-class StoreSessionRequest extends FormRequest
+class StoreSessionUserDivisionRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,10 +16,7 @@ class StoreSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
-            'remember' => ['nullable'],
-            'division_id' => ['nullable', 'exists:' . Division::class . ',id']
+            'division_id' => ['required', 'exists:' . Division::class . ',id']
         ];
     }
 }
