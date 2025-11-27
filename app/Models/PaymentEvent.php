@@ -29,18 +29,7 @@ class PaymentEvent extends BaseModel
 
     ### Методы
     ##################################################
-    // public static function getNPP(int|Payment $payment, string|Carbon|CarbonImmutable $date){
-    //     if($payment instanceof Payment)
-    //         $payment = $payment->id;
-
-    //     if($date instanceof Carbon)
-    //         $date = $date->toImmutable();
-
-    //     if(is_string($date))
-    //         $date = CarbonImmutable::parse($date);
-
-    //     return self::where('payment_id', $payment)->whereBetween('date', [$date->startOfYear(), $date->endOfYear()])
-    // }
+    //
 
     ### Связи
     ##################################################

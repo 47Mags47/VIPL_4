@@ -19,7 +19,7 @@ class BankFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => 'test',
+            'code' => 'test_' . $this->faker->word(),
             'name' => Str::random(rand(1, 255)),
             'contract_id' => BankContract::count() > 0
                 ? BankContract::all()->random()->id

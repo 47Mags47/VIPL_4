@@ -18,8 +18,8 @@ class PaymentEventController
         return PaymentEvent::create($request->validated())->toResource();
     }
 
-    public function show(PaymentEvent $event){
-        return $event->toResource();
+    public function show(PaymentEvent $paymentEvent){
+        return $paymentEvent->toResource();
     }
 
     public function update(UpdatepaymentEventRequest $request, PaymentEvent $paymentEvent)
