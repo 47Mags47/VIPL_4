@@ -2,20 +2,8 @@
 
 namespace Tests\Cases;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
-abstract class APIControllerCase extends TestCase
+abstract class APIControllerCase extends ControllerTestCase
 {
-    use RefreshDatabase;
-    protected $seed = true;
-
-    public $controller;
-    public $routeName;
-    public $model;
-    public $payload_key;
-
-    public $payload = [];
     public $methods = [
         'index',
         'store',
@@ -23,14 +11,6 @@ abstract class APIControllerCase extends TestCase
         'update',
         'destroy',
     ];
-
-    protected function checkMethodExistance(string $method)
-    {
-        if (!in_array($method, $this->methods))
-            $this->markTestSkipped('Метод пропущен');
-
-        $this->assertTrue(method_exists($this->controller, $method), 'Контроллер не имеет метода ' . $method);
-    }
 
     public function test_check_index_method()
     {
@@ -56,6 +36,19 @@ abstract class APIControllerCase extends TestCase
 
         $response
             ->assertCreated()
+            ->assertJsonIsObject()
+            ->assertJson(['data' => $model->toResource()->jsonSerialize()]);
+    }
+
+    public function test_check_show_method() {
+        $this->checkMethodExistance('show');
+
+        $model = $this->model::factory()->create();
+
+        $response = $this->getJson(route($this->routeName . '.show', [$this->payload_key => $model->id]));
+
+        $response
+            ->assertOk()
             ->assertJsonIsObject()
             ->assertJson(['data' => $model->toResource()->jsonSerialize()]);
     }

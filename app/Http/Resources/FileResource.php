@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class FileResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            'disk' => $this->disk,
+            'path' => $this->path,
+            'name' => $this->name,
+            'origin_name' => $this->origin_name,
+        ];
+    }
+}
