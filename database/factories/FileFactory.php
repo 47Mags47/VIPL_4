@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -21,7 +22,10 @@ class FileFactory extends Factory
             'disk' => array_rand(array_keys(config('filesystems.disks'))),
             'path' => $this->faker->word(),
             'name' => Str::random(40),
-            'origin_name' => $this->faker->filePath()
+            'origin_name' => $this->faker->filePath(),
+            'upload_at' => $this->faker->boolean()
+                ? User::all()->random()->id
+                : null
         ];
     }
 }

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('origin_name');
 
+            $table->foreignId('upload_at')->nullable()->index();
+
             $table->timestamps();
         });
     }
