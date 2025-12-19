@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::apiResource('routes',            \App\Http\Controllers\RouteController::class)->only('index');
+
 Route::middleware('guest')->post('/session',                    [\App\Http\Controllers\SessionController::class, 'store'])->name('session.store');
 Route::middleware('auth')->delete('/session/destroy',           [\App\Http\Controllers\SessionController::class, 'destroy'])->name('session.destroy');
 
