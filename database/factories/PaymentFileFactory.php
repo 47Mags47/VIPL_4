@@ -23,7 +23,7 @@ class PaymentFileFactory extends Factory
         $file = File::factory()->create([
             'disk' => 'local',
             'path' => 'test',
-            'name' => 'payment-file.csv',
+            'name' => Str::random(10),
             'origin_name' => 'test_' . Str::random(10),
         ]);
 
