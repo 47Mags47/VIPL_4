@@ -57,6 +57,7 @@ class PaymentFileControllerTest extends APIControllerCase
             ->assertJsonFragment($model->toResource()->jsonSerialize());
 
         Storage::disk('local')->delete('test' . '/' . $file_name);
+        Storage::disk($model->disk)->delete($model->path . '/' . $model->name);
     }
 
     public function test_check_update_method()
