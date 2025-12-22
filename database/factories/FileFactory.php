@@ -24,7 +24,7 @@ class FileFactory extends Factory
             'name' => Str::random(40),
             'origin_name' => $this->faker->filePath(),
             'upload_at' => $this->faker->boolean()
-                ? User::all()->random()->id
+                ? User::factory()->create()->id
                 : null
         ];
     }
