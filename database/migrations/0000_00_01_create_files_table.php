@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('path');
             $table->string('name');
             $table->string('origin_name');
+            $table->json('errors');
 
             $table->foreignId('upload_at')->nullable()->index();
 

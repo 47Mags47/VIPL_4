@@ -16,7 +16,7 @@ class StorePaymentFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['required', 'file'],
+            'file' => ['required', 'file', 'mimetypes:text/csv'],
             'bank_id' => ['required', 'exists:' . Bank::class . ',id'],
             'event_id' => ['required', 'exists:' . PaymentEvent::class . ',id'],
         ];

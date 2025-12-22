@@ -6,16 +6,8 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\File>
- */
 class FileFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -23,6 +15,9 @@ class FileFactory extends Factory
             'path' => $this->faker->word(),
             'name' => Str::random(40),
             'origin_name' => $this->faker->filePath(),
+            'errors' => rand(0, 5)
+                ? []
+                : ['Файл содержит ошибки (тестовое сообщение)'],
             'upload_at' => $this->faker->boolean()
                 ? User::factory()->create()->id
                 : null

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Classes\BaseModel;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 
 class File extends BaseModel
 {
@@ -18,8 +18,35 @@ class File extends BaseModel
         'path',
         'name',
         'origin_name',
-        'upload_at'
+        'errors',
+        'upload_at',
     ];
+
+    protected $attributes = [
+        'errors' => '[]'
+    ];
+
+    protected function hasToStorage(): Attribute
+    {
+        return new Attribute(
+            get: fn () => Storage::disk($this->disk)->has($this->path . '/' . $this->name),
+        );
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'errors' => 'array',
+        ];
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        self::deleted(function ($model) {
+            Storage::disk($model->disk)->delete($model->path . '/' . $model->name);
+        });
+    }
 
     ### Методы
     ##################################################
@@ -27,12 +54,5 @@ class File extends BaseModel
 
     ### Связи
     ##################################################
-    public function file(): HasOne {
-        return $this->hasOne(File::class, 'id', 'file_id');
-    }
-
-    public function uploaded(): BelongsTo
-    {
-        return $this->file->belongsTo(User::class, 'upload_at');
-    }
+    //
 }
