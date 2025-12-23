@@ -77,7 +77,7 @@ class PaymentFileImport implements
             '7'     => ['required', 'decimal:0,2'],
             '8'     => ['nullable', 'regex:/[0-9]{4}/'],
             '9'     => ['nullable', 'regex:/[0-9]{6}/'],
-            '10'    => ['nullable', 'date_format:dY.m.Y'],
+            '10'    => ['nullable', 'date_format:d.m.Y'],
             '11'    => ['nullable', 'string']
         ];
     }
