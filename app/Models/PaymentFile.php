@@ -22,13 +22,11 @@ class PaymentFile extends BaseModel
 
     ### Методы
     ##################################################
-    public static function generateFakeOnlyFile(array|null $data = null): string
+    public static function generateFakeOnlyFile(?array $data = null): string
     {
         $file_name = Str::random(40);
 
-        $data = $data !== null
-            ? $data
-            : Recipient::factory(50)
+        $data = $data ?: Recipient::factory(50)
             ->recycle(PaymentFile::factory()->create())
             ->make();
 
@@ -38,7 +36,7 @@ class PaymentFile extends BaseModel
         return $file_name;
     }
 
-    public static function generateFakeFile(array|null $data = null): File
+    public static function generateFakeFile(?array $data = null): File
     {
         $file_name = self::generateFakeOnlyFile($data);
 
@@ -50,18 +48,18 @@ class PaymentFile extends BaseModel
         ]);
     }
 
-    public static function fakeGenerate(array|null $data = null): self
+    public static function fakeGenerate(?array $data = null, ?Bank $bank = null, ?PaymentEvent $event = null): self
     {
         $file = self::generateFakeFile($data);
 
-        $bank_id = in_array('bank_id', $data ?? []) ? $data['bank_id'] : Bank::factory()->create()->id;
-        $event_id = in_array('event_id', $data ?? []) ? $data['event_id'] : PaymentEvent::factory()->create()->id;
+        $bank= $bank ?: Bank::factory()->create();
+        $event = $event ?: PaymentEvent::factory()->create();
 
         return self::create(
             [
                 'file_id' => $file->id,
-                'bank_id' => $bank_id,
-                'event_id' => $event_id,
+                'bank_id' => $bank->id,
+                'event_id' => $event->id,
             ]
         );
     }

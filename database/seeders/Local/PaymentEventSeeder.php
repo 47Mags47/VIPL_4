@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Local;
 
+use App\Models\Payment;
 use App\Models\PaymentEvent;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,8 @@ class PaymentEventSeeder extends Seeder
      */
     public function run(): void
     {
-        PaymentEvent::factory(100)->create();
+        Payment::all()->each(fn($payment) => PaymentEvent::factory(5)->create([
+            'payment_id' => $payment->id
+        ]));
     }
 }

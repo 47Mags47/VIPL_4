@@ -13,6 +13,8 @@ class BankContractSeeder extends Seeder
      */
     public function run(): void
     {
-        Writer::all()->each(fn($writer) => BankContract::factory()->create(['writer_id' => $writer->id]));
+        Writer::all()->each(fn($writer) => BankContract::factory()->create([
+            'writer_id' => $writer->id
+        ]));
     }
 }

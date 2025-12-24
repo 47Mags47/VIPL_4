@@ -20,21 +20,10 @@ class PaymentFileFactory extends Factory
      */
     public function definition(): array
     {
-        $file = File::factory()->create([
-            'disk' => 'local',
-            'path' => 'test',
-            'name' => Str::random(10),
-            'origin_name' => 'test_' . Str::random(10),
-        ]);
-
         return [
-            'file_id' => $file->id,
-            'bank_id' => Bank::count() > 0
-                ? Bank::all()->random()->id
-                : Bank::factory()->create()->id,
-            'event_id' => PaymentEvent::count() > 0
-                ? PaymentEvent::all()->random()->id
-                : PaymentEvent::factory()->create()->id,
+            'file_id'   => File::factory()->create(),
+            'bank_id'   => Bank::factory()->create(),
+            'event_id'  => PaymentEvent::factory()->create(),
         ];
     }
 }

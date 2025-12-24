@@ -14,8 +14,8 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         Division::all()->each(function($division){
-            $user = User::factory()->create();
-            $division->users()->attach($user->id);
+            $users = User::factory(rand(1,3))->create();
+            $division->users()->attach($users);
         });
     }
 }

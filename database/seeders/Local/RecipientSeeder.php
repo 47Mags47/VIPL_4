@@ -11,7 +11,7 @@ class RecipientSeeder extends Seeder
     public function run(): void
     {
         PaymentFile::all()->each(function ($file) {
-            Recipient::factory()->create(['file_id' => $file->id]);
+            Recipient::factory(10)->create(['file_id' => $file->id]);
         });
     }
 }

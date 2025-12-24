@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained(PaymentEvent::getTableName());
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

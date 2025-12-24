@@ -12,9 +12,9 @@ class FileFactory extends Factory
     {
         return [
             'disk' => array_rand(array_keys(config('filesystems.disks'))),
-            'path' => $this->faker->word(),
+            'path' => 'test',
             'name' => Str::random(40),
-            'origin_name' => $this->faker->filePath(),
+            'origin_name' => 'test_' . Str::random(10),
             'errors' => rand(0, 5)
                 ? []
                 : ['Файл содержит ошибки (тестовое сообщение)'],

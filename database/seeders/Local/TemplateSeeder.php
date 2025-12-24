@@ -4,6 +4,7 @@ namespace Database\Seeders\Local;
 
 use App\Models\Template;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class TemplateSeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class TemplateSeeder extends Seeder
      */
     public function run(): void
     {
-        Template::factory()->create();
+        Template::create(['content' => Storage::disk('test')->get('template_Sber.php')]);
+        Template::create(['content' => Storage::disk('test')->get('template_UralSib.php')]);
+        Template::create(['content' => Storage::disk('test')->get('template_Rosselhoz.php')]);
     }
 }
