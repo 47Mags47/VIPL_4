@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseModel extends Model
@@ -13,9 +14,26 @@ abstract class BaseModel extends Model
         return with(new static)->getTable();
     }
 
+    public function scopeFilter(Builder $builder): Builder
+    {
+        $namespace = $this::class;
+        $className = explode('\\', $namespace)[count(explode('\\', $namespace)) - 1];
+
+        if (class_exists("\\App\\Filters\\$className")) {
+            $filterClass = "\\App\\Filters\\$className";
+            $filter = new $filterClass();
+
+            $builder = $filter->apply($builder);
+        } else {
+            $builder = new \App\Classes\Filter($builder)->apply();
+        }
+
+        return $builder;
+    }
+
     public static function getResource()
     {
-        $query = self::query();
+        $query = self::Filter();
 
         $data = (request()->has('paginate') && request()->boolean('paginate'))
             ? $query->paginate(request()->input('paginate'))
