@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Template;
 use App\Models\WriterType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('name');
             $table->string('class');
+            $table->foreignId('template_id')->nullable()->default(null)->constrained(Template::getTableName());
 
             $table->foreignId('type_id')->constrained(WriterType::getTableName());
 

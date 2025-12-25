@@ -26,11 +26,4 @@ class UserFactory extends Factory
             'deleted_at'        => rand(0, 10) === 10 ? now() : null
         ];
     }
-
-    public function configure(): static
-    {
-        return $this->afterCreating(function (User $user) {
-            $user->divisions()->attach(Division::factory()->create());
-        });
-    }
 }

@@ -17,6 +17,7 @@ class Writer extends BaseModel
         'code',
         'name',
         'class',
+        'template_id',
         'type_id',
     ];
 
