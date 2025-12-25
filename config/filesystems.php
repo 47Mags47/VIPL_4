@@ -53,6 +53,14 @@ return [
             'serve' => true,
             'throw' => false,
             'report' => false,
+        ],
+
+        'templates' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/templates'),
+            'serve' => true,
+            'throw' => false,
+            'report' => false,
         ]
 
     ],

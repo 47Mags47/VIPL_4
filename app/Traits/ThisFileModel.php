@@ -85,6 +85,10 @@ trait ThisFileModel
         return Storage::disk($this->disk ?? 'local')->path($this->getLocalPath());
     }
 
+    public function getContent(){
+        return Storage::disk($this->disk ?? 'local')->get($this->getLocalPath());
+    }
+
     public function addError(string $error)
     {
         $errors = $this->errors;

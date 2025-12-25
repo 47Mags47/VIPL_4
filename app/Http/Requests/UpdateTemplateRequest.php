@@ -14,7 +14,8 @@ class UpdateTemplateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => ['required', 'string'],
+            'name' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'text'],
         ];
     }
 }

@@ -2,25 +2,20 @@
 
 namespace Database\Factories;
 
+use App\Models\File;
+use App\Models\TemplateType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Template>
- */
 class TemplateFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            'content' => trim(
-                '@foreach ($recipients as $recipient)
-                    {{ $recipient->toArray() }}
-                @endforeach')
+            'name' => $this->faker->words(3),
+            'file_id' => File::factory()->create([
+                'disk' => 'templates'
+            ]),
+            'type_id' => TemplateType::all()->random()->id,
         ];
     }
 }
