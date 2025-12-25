@@ -18,4 +18,3 @@ Route::apiResource('payment-events',    \App\Http\Controllers\PaymentEventContro
 Route::apiResource('payment-files',     \App\Http\Controllers\PaymentFileController::class);
 Route::apiResource('templates',         \App\Http\Controllers\TemplateController::class);
 Route::apiResource('users',             \App\Http\Controllers\UserController::class)->except('index');
-Route::apiResource('writers',           \App\Http\Controllers\WriterController::class);
