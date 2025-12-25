@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Writer;
+use App\Models\Template;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('number');
             $table->date('signed_at');
 
-            $table->foreignId('writer_id')->constrained(Writer::getTableName());
+            $table->foreignId('template_id')->constrained(Template::getTableName());
 
             $table->timestamps();
         });

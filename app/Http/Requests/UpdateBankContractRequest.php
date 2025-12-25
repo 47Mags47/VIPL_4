@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Writer;
+use App\Models\Template;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBankContractRequest extends FormRequest
@@ -17,7 +17,7 @@ class UpdateBankContractRequest extends FormRequest
         return [
             'number' => ['required', 'string', 'max:255'],
             'signed_at' => ['required', 'date'],
-            'writer_id' => ['required', 'exists:' . Writer::getTableName() . ',id']
+            'template_id' => ['required', 'exists:' . Template::getTableName() . ',id']
         ];
     }
 }

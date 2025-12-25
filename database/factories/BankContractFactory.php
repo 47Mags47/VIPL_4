@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Writer;
+use App\Models\Template;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -21,7 +21,9 @@ class BankContractFactory extends Factory
         return [
             'number' => Str::random(rand(3, 15)),
             'signed_at' => now()->subDays(rand(0, 365))->format('Y-m-d'),
-            'writer_id' => Writer::count() > 0 ? Writer::all()->random()->id : Writer::factory()->create()->id,
+            'template_id' => Template::count() > 0
+                ? Template::all()->random()->id
+                : Template::factory()->create()->id,
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace Database\Seeders\Local;
 
 use App\Models\BankContract;
-use App\Models\Writer;
+use App\Models\Template;
 use Illuminate\Database\Seeder;
 
 class BankContractSeeder extends Seeder
@@ -13,8 +13,8 @@ class BankContractSeeder extends Seeder
      */
     public function run(): void
     {
-        Writer::all()->each(fn($writer) => BankContract::factory()->create([
-            'writer_id' => $writer->id
+        Template::all()->each(fn($template) => BankContract::factory()->create([
+            'template_id' => $template->id
         ]));
     }
 }

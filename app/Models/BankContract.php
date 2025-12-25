@@ -15,7 +15,7 @@ class BankContract extends BaseModel
     protected $fillable = [
         'number',
         'signed_at',
-        'writer_id',
+        'template_id',
     ];
 
     protected function casts(): array
@@ -31,8 +31,8 @@ class BankContract extends BaseModel
 
     ### Связи
     ##################################################
-    public function writer(): BelongsTo
+    public function template(): BelongsTo
     {
-        return $this->belongsTo(Writer::class, 'writer_id');
+        return $this->belongsTo(Template::class, 'template_id');
     }
 }

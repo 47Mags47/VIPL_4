@@ -13,6 +13,7 @@ class TemplateSeeder extends Seeder
     {
         Template::create([
             'name' => 'Выплата в Сбер',
+            'file_name' => 'f8615{{ substr($npp, 2, 3) }}.xml',
             'file_id' => File::factory()->create([
                 'disk' => 'templates',
                 'name' => 'BankFile_Sber.blade.php',
@@ -24,6 +25,7 @@ class TemplateSeeder extends Seeder
 
         Template::create([
             'name' => 'Выплата в УралСиб',
+            'file_name' => '55557460{{ substr($npp, 0, 3) }}I{{ substr($npp, 3, 2) }}',
             'file_id' => File::factory()->create([
                 'disk' => 'templates',
                 'name' => 'BankFile_UralSib.blade.php',
@@ -35,6 +37,7 @@ class TemplateSeeder extends Seeder
 
         Template::create([
             'name' => 'Выплата в Россельхоз',
+            'file_name' => '{{ substr($npp, 0, 5) }}.xml',
             'file_id' => File::factory()->create([
                 'disk' => 'templates',
                 'name' => 'BankFile_Rosselhoz.blade.php',

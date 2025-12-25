@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
+            $table->text('file_name');
             $table->foreignId('file_id')->constrained(File::getTableName());
             $table->foreignId('type_id')->constrained(TemplateType::getTableName());
 
