@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Bank;
 use App\Models\File;
-use App\Models\PaymentEvent;
+use App\Models\PaymentRaport;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,8 +21,12 @@ class BankFileFactory extends Factory
     {
         return [
             'file_id' => File::factory()->create(),
-            'bank_id' => Bank::factory()->create(),
-            'event_id' => PaymentEvent::factory()->create(),
+            'bank_id' => Bank::count() > 0
+                ? Bank::all()->random()->id
+                : Bank::factory()->create()->id,
+            'raport_id' => PaymentRaport::count() > 0
+                ? PaymentRaport::all()->random()->id
+                : PaymentRaport::factory()->create()->id,
         ];
     }
 }

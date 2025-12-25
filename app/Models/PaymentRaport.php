@@ -3,20 +3,18 @@
 namespace App\Models;
 
 use App\Classes\BaseModel;
-use App\Traits\ThisFileModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class BankFile extends BaseModel
+class PaymentRaport extends BaseModel
 {
-    use HasFactory, ThisFileModel;
+    use HasFactory;
 
     ### Настройки
     ##################################################
     protected $fillable = [
-        'bank_id',
-        'event_id',
-        'raport_id',
+        'event_id'
     ];
 
     ### Методы
@@ -25,8 +23,13 @@ class BankFile extends BaseModel
 
     ### Связи
     ##################################################
-    public function bank(): BelongsTo
+    public function event(): BelongsTo
     {
-        return $this->belongsTo(Bank::class, 'bank_id');
+        return $this->belongsTo(PaymentEvent::class, 'event_id');
+    }
+
+    public function bankFiles(): HasMany
+    {
+        return $this->hasMany(BankFile::class, 'raport_id');
     }
 }

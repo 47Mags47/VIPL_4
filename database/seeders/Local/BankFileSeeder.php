@@ -4,7 +4,7 @@ namespace Database\Seeders\Local;
 
 use App\Models\Bank;
 use App\Models\BankFile;
-use App\Models\PaymentEvent;
+use App\Models\PaymentRaport;
 use Illuminate\Database\Seeder;
 
 class BankFileSeeder extends Seeder
@@ -14,9 +14,6 @@ class BankFileSeeder extends Seeder
      */
     public function run(): void
     {
-        BankFile::factory(50)->create([
-            'bank_id' => Bank::all()->random()->id,
-            'event_id' => PaymentEvent::all()->random()->id,
-        ]);
+        BankFile::factory(50)->create();
     }
 }

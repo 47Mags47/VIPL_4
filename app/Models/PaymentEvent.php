@@ -3,10 +3,9 @@
 namespace App\Models;
 
 use App\Classes\BaseModel;
-use Carbon\Carbon;
-use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PaymentEvent extends BaseModel
 {
@@ -36,5 +35,10 @@ class PaymentEvent extends BaseModel
     public function payment():BelongsTo
     {
         return $this->belongsTo(Payment::class, 'payment_id');
+    }
+
+    public function raports(): HasMany
+    {
+        return $this->hasMany(PaymentRaport::class, 'event_id');
     }
 }

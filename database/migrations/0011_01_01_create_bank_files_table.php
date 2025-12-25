@@ -2,7 +2,7 @@
 
 use App\Models\Bank;
 use App\Models\File;
-use App\Models\PaymentEvent;
+use App\Models\PaymentRaport;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->foreignId('file_id')->constrained(File::getTableName());
             $table->foreignId('bank_id')->constrained(Bank::getTableName());
-            $table->foreignId('event_id')->constrained(PaymentEvent::getTableName());
+            $table->foreignId('raport_id')->constrained(PaymentRaport::getTableName());
 
             $table->timestamps();
         });

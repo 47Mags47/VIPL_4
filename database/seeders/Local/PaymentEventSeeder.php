@@ -13,8 +13,16 @@ class PaymentEventSeeder extends Seeder
      */
     public function run(): void
     {
-        Payment::all()->each(fn($payment) => PaymentEvent::factory(5)->create([
-            'payment_id' => $payment->id
-        ]));
+        PaymentEvent::factory(5)->create([
+            'payment_id' => 1
+        ]);
+
+        PaymentEvent::factory(5)->create([
+            'payment_id' => 2
+        ]);
+
+        PaymentEvent::factory(5)->create([
+            'payment_id' => 3
+        ]);
     }
 }
