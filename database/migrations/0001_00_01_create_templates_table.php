@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('file_name');
             $table->foreignId('file_id')->constrained(File::getTableName());
             $table->foreignId('type_id')->constrained(TemplateType::getTableName());
+            $table->integer('chunk')->nullable()->default(null);
 
             $table->timestamps();
         });

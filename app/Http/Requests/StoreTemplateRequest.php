@@ -15,6 +15,7 @@ class StoreTemplateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'chunk' => ['nullable', 'integer'],
             'content' => ['required', 'text'],
         ];
     }

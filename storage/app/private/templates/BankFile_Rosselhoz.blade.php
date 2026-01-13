@@ -2,7 +2,7 @@
 <СчетаПК
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="Wages.xsd"
-    ДатаФормирования="{{ $global['dates']['now'] }}"
+    ДатаФормирования="{{ $dates['now'] }}"
     НомерДоговора="{{ $bank['contract']['number'] }}"
     ДатаДоговора="2009-12-18"
     НаименованиеОрганизации="ГКУ ЦСВИ"
@@ -14,7 +14,7 @@
     ДатаРеестра="2025-01-14"
 >
     <ЗачислениеЗарплаты>
-@foreach ($recipients['data'] as $recipient)
+@foreach ($recipients['data'] as $i => $recipient)
         <Сотрудник Нпп="{{ $i + 1 }}">
             <Фамилия>{{ $recipient['last_name'] }}</Фамилия>
             <Имя>{{ $recipient['first_name'] }}</Имя>

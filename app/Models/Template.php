@@ -16,7 +16,8 @@ class Template extends BaseModel
     protected $fillable = [
         'name',
         'file_id',
-        'type_id'
+        'type_id',
+        'chunk'
     ];
 
     ### Методы

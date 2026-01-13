@@ -41,7 +41,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
@@ -50,18 +50,20 @@ return [
         'test' => [
             'driver' => 'local',
             'root' => storage_path('app/private/test'),
-            'serve' => true,
-            'throw' => false,
-            'report' => false,
+            'throw' => true,
         ],
 
         'templates' => [
             'driver' => 'local',
             'root' => storage_path('app/private/templates'),
-            'serve' => true,
-            'throw' => false,
-            'report' => false,
-        ]
+            'throw' => true,
+        ],
+
+        'bank-file' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/bank-files'),
+            'throw' => true,
+        ],
 
     ],
 

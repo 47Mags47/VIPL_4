@@ -2,29 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PaymentEvent;
+use App\Http\Requests\StorePaymentRaportRequest;
+use App\Jobs\CreateBankFilesJob;
 use App\Models\PaymentRaport;
-use Illuminate\Http\Request;
 
 class PaymentRaportController
 {
-    public function index(Request $request){
+    public function index(){
         return PaymentRaport::getResource();
     }
 
-    public function store(PaymentEvent $paymentEvent){
+    public function store(StorePaymentRaportRequest $request){
         $raport = PaymentRaport::create([
-            'event_id' => $paymentEvent->id
+            'event_id' => $request->input('event_id')
         ]);
+
+        CreateBankFilesJob::dispatch($raport);
 
         return $raport->toResource();
     }
 
-    public function show(PaymentEvent $paymentEvent, PaymentRaport $paymentRaport){
+    public function show(PaymentRaport $paymentRaport){
         return $paymentRaport->toResource();
     }
 
-    public function destroy(PaymentEvent $paymentEvent, PaymentRaport $paymentRaport){
+    public function destroy(PaymentRaport $paymentRaport){
         $paymentRaport->delete();
+
+        return response('ok', 200);
     }
 }

@@ -6,6 +6,7 @@ use App\Classes\BaseModel;
 use App\Exports\PaymentFileExport;
 use App\Traits\ThisFileModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class PaymentFile extends BaseModel
@@ -66,5 +67,8 @@ class PaymentFile extends BaseModel
 
     ### Связи
     ##################################################
-    //
+    public function recipients(): HasMany
+    {
+        return $this->hasMany(Recipient::class, 'file_id');
+    }
 }

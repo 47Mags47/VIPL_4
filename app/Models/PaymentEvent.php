@@ -41,4 +41,9 @@ class PaymentEvent extends BaseModel
     {
         return $this->hasMany(PaymentRaport::class, 'event_id');
     }
+
+    public function files(): HasMany
+    {
+        return $this->hasMany(PaymentFile::class, 'event_id');
+    }
 }

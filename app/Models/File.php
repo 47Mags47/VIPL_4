@@ -29,7 +29,7 @@ class File extends BaseModel
     protected function hasToStorage(): Attribute
     {
         return new Attribute(
-            get: fn () => Storage::disk($this->disk)->has($this->path . '/' . $this->name),
+            get: fn() => Storage::disk($this->disk)->has($this->path . '/' . $this->name),
         );
     }
 
@@ -40,11 +40,16 @@ class File extends BaseModel
         ];
     }
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
         self::deleted(function ($model) {
-            Storage::disk($model->disk)->delete($model->path . '/' . $model->name);
+            $local_path = $model->path !== ''
+                ? $model->path . '/' . $model->name
+                : $model->name;
+
+            Storage::disk($model->disk)->delete($local_path);
         });
     }
 

@@ -26,6 +26,7 @@ class TemplateController
 
         $template = Template::create([
             'name' => $request->input('name'),
+            'chunk' => $request->input('chunk'),
             'file_id' => $file->id,
             'type_id' => TemplateType::byCode('template')->id,
         ]);

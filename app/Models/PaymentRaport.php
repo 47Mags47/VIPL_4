@@ -17,6 +17,15 @@ class PaymentRaport extends BaseModel
         'event_id'
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function ($model) {
+            $model->bankFiles->each(fn($bankFile) => $bankFile->delete());
+        });
+    }
+
     ### Методы
     ##################################################
     //

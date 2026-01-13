@@ -20,7 +20,8 @@ class TemplateSeeder extends Seeder
                 'origin_name' => 'BankFile_Sber.blade.php',
                 'upload_at' => null
             ])->id,
-            'type_id' => TemplateType::byCode('bank-file')->id,
+            'type_id' => TemplateType::byCode('blade')->id,
+            'chunk' => 25000
         ]);
 
         Template::create([
@@ -32,7 +33,7 @@ class TemplateSeeder extends Seeder
                 'origin_name' => 'BankFile_UralSib.blade.php',
                 'upload_at' => null
             ])->id,
-            'type_id' => TemplateType::byCode('bank-file')->id,
+            'type_id' => TemplateType::byCode('blade')->id,
         ]);
 
         Template::create([
@@ -44,7 +45,7 @@ class TemplateSeeder extends Seeder
                 'origin_name' => 'BankFile_Rosselhoz.blade.php',
                 'upload_at' => null
             ])->id,
-            'type_id' => TemplateType::byCode('bank-file')->id,
+            'type_id' => TemplateType::byCode('blade')->id,
         ]);
     }
 }
