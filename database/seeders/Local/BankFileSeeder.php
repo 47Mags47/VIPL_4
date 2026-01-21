@@ -2,8 +2,7 @@
 
 namespace Database\Seeders\Local;
 
-use App\Models\Bank;
-use App\Models\BankFile;
+use App\Jobs\CreateBankFilesJob;
 use App\Models\PaymentRaport;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +13,6 @@ class BankFileSeeder extends Seeder
      */
     public function run(): void
     {
-        BankFile::factory(50)->create();
+        PaymentRaport::all()->each(fn($raport) => CreateBankFilesJob::dispatchSync($raport));
     }
 }

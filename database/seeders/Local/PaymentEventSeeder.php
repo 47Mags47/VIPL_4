@@ -13,16 +13,27 @@ class PaymentEventSeeder extends Seeder
      */
     public function run(): void
     {
-        PaymentEvent::factory(5)->create([
-            'payment_id' => 1
-        ]);
+        $payment = Payment::randomOrCreate();
 
-        PaymentEvent::factory(5)->create([
-            'payment_id' => 2
+        PaymentEvent::factory()->create([
+            'date' => now()->subDay(2),
+            'payment_id' => $payment->id
         ]);
-
-        PaymentEvent::factory(5)->create([
-            'payment_id' => 3
+        PaymentEvent::factory()->create([
+            'date' => now()->subDay(1),
+            'payment_id' => $payment->id
+        ]);
+        PaymentEvent::factory()->create([
+            'date' => now(),
+            'payment_id' => $payment->id
+        ]);
+        PaymentEvent::factory()->create([
+            'date' => now()->addDay(1),
+            'payment_id' => $payment->id
+        ]);
+        PaymentEvent::factory()->create([
+            'date' => now()->addDay(1),
+            'payment_id' => $payment->id
         ]);
     }
 }

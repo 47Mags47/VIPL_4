@@ -15,5 +15,6 @@ class ProdSeeder extends Seeder
     public function run(): void
     {
         $this->call(Prod\TemplateTypeSeeder::class);
+        $this->call(Prod\TemplateStyleSeeder::class);
     }
 }

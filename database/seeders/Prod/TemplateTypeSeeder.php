@@ -9,6 +9,7 @@ class TemplateTypeSeeder extends Seeder
 {
     public function run(): void
     {
-        TemplateType::create(['code' => 'blade', 'name' => 'Файл выплаты в банк']);
+        TemplateType::create(['code' => 'bankFile',         'name' => 'Файл для отправки в банк']);
+        TemplateType::create(['code' => 'uploadFile',   'name' => 'Файл для загрузки в систему']);
     }
 }

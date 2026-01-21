@@ -20,13 +20,11 @@ class BankFileFactory extends Factory
     public function definition(): array
     {
         return [
-            'file_id' => File::factory()->create(),
-            'bank_id' => Bank::count() > 0
-                ? Bank::all()->random()->id
-                : Bank::factory()->create()->id,
-            'raport_id' => PaymentRaport::count() > 0
-                ? PaymentRaport::all()->random()->id
-                : PaymentRaport::factory()->create()->id,
+            'file_id' => File::factory()->create([
+                'disk' => 'bank-file',
+            ]),
+            'bank_id' => Bank::randomOrCreate()->id,
+            'raport_id' => PaymentRaport::randomOrCreate()->id,
         ];
     }
 }

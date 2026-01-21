@@ -17,6 +17,7 @@ class BankFile extends BaseModel
         'bank_id',
         'event_id',
         'raport_id',
+        'file_id'
     ];
 
     ### Методы
@@ -28,5 +29,10 @@ class BankFile extends BaseModel
     public function bank(): BelongsTo
     {
         return $this->belongsTo(Bank::class, 'bank_id');
+    }
+
+    public function raport(): BelongsTo
+    {
+        return $this->belongsTo(PaymentRaport::class, 'raport_id');
     }
 }

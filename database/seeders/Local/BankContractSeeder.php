@@ -4,6 +4,7 @@ namespace Database\Seeders\Local;
 
 use App\Models\BankContract;
 use App\Models\Template;
+use App\Models\TemplateType;
 use Illuminate\Database\Seeder;
 
 class BankContractSeeder extends Seeder
@@ -13,7 +14,7 @@ class BankContractSeeder extends Seeder
      */
     public function run(): void
     {
-        Template::all()->each(fn($template) => BankContract::factory()->create([
+        Template::where('type_id', TemplateType::byCode('bankFile')->id)->each(fn($template) => BankContract::factory()->create([
             'template_id' => $template->id
         ]));
     }

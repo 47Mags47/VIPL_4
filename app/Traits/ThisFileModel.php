@@ -16,49 +16,49 @@ trait ThisFileModel
     protected function disk(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->file->disk,
+            get: fn() => $this->file->disk,
         );
     }
 
     protected function path(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->file->path,
+            get: fn() => $this->file->path,
         );
     }
 
     protected function name(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->file->name,
+            get: fn() => $this->file->name,
         );
     }
 
     protected function origin_name(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->file->origin_name,
+            get: fn() => $this->file->origin_name,
         );
     }
 
     protected function errors(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->file->errors,
+            get: fn() => $this->file->errors,
         );
     }
 
     protected function mime(): Attribute
     {
         return new Attribute(
-            get: fn () => Storage::disk($this->disk)->mimeType($this->getLocalPath())
+            get: fn() => Storage::disk($this->disk)->mimeType($this->getLocalPath())
         );
     }
 
     protected function hasToStorage(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->file->hasToStorage,
+            get: fn() => $this->file->hasToStorage,
         );
     }
 
@@ -85,7 +85,13 @@ trait ThisFileModel
         return Storage::disk($this->disk ?? 'local')->path($this->getLocalPath());
     }
 
-    public function getContent(){
+    public function setContent(string $content)
+    {
+        return Storage::disk($this->disk ?? 'local')->put($this->getLocalPath(), $content);
+    }
+
+    public function getContent()
+    {
         return Storage::disk($this->disk ?? 'local')->get($this->getLocalPath());
     }
 

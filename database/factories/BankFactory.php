@@ -21,9 +21,7 @@ class BankFactory extends Factory
         return [
             'code' => 'test_' . $this->faker->unique()->word(),
             'name' => Str::random(rand(1, 255)),
-            'contract_id' => BankContract::count() > 0
-                ? BankContract::all()->random()->id
-                : BankContract::factory()->create()->id,
+            'contract_id' => BankContract::randomOrCreate()->id,
         ];
     }
 }

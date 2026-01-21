@@ -21,9 +21,7 @@ class BankContractFactory extends Factory
         return [
             'number' => Str::random(rand(3, 15)),
             'signed_at' => now()->subDays(rand(0, 365))->format('Y-m-d'),
-            'template_id' => Template::count() > 0
-                ? Template::all()->random()->id
-                : Template::factory()->create()->id,
+            'template_id' => Template::randomOrCreate()->id,
         ];
     }
 }

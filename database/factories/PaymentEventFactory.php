@@ -18,7 +18,7 @@ class PaymentEventFactory extends Factory
     public function definition(): array
     {
         return [
-            'date' => now()->addDay(rand(-15, 15))->format('Y-m-d'),
+            'date' => now()->addDay(rand(-5, 5))->format('Y-m-d'),
             'payment_id' => Payment::factory(),
         ];
     }

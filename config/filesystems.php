@@ -47,15 +47,21 @@ return [
             'report' => false,
         ],
 
-        'test' => [
+        'assets' => [
             'driver' => 'local',
-            'root' => storage_path('app/private/test'),
+            'root' => storage_path('app/private/assets'),
             'throw' => true,
         ],
 
         'templates' => [
             'driver' => 'local',
             'root' => storage_path('app/private/templates'),
+            'throw' => true,
+        ],
+
+        'uploads' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/uploads'),
             'throw' => true,
         ],
 

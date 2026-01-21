@@ -17,7 +17,8 @@ class Template extends BaseModel
         'name',
         'file_id',
         'type_id',
-        'chunk'
+        'style_id',
+        'chunk',
     ];
 
     ### Методы

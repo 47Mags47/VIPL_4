@@ -33,7 +33,7 @@ class CreateBankFileJob implements ShouldQueue
             'origin_name' => $file_name
         ]);
 
-        $bankFile = BankFile::factory()->create([
+        $bankFile = BankFile::create([
             'file_id' => $file->id,
             'bank_id' => $this->bank->id,
             'raport_id' => $this->raport->id,
@@ -82,6 +82,7 @@ class CreateBankFileJob implements ShouldQueue
     {
         $template_content = Storage::disk($this->bank->contract->template->disk)
             ->get($this->bank->contract->template->getLocalPath());
+
         return Blade::render($template_content, $this->generateFileData());
     }
 }

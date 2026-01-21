@@ -16,7 +16,7 @@ class CreateBankFilesJob implements ShouldQueue
 
     public function handle(): void
     {
-        $files = $this->raport->event->files;
+        $files = $this->raport->event->paymentFiles;
 
         $recipients_by_bank = $files->groupBy('bank_id')->map(function ($files) {
             return $files->map(fn($file) => $file->recipients)->collapse();
@@ -32,10 +32,10 @@ class CreateBankFilesJob implements ShouldQueue
     public function createBankFile(Bank $bank, Collection $recipients)
     {
         if ($bank->contract->template->chunk === null)
-            CreateBankFileJob::dispatch($this->raport, $bank, $recipients);
+            CreateBankFileJob::dispatchSync($this->raport, $bank, $recipients);
         else
             $recipients->chunk($bank->contract->template->chunk)->each(function ($recipients) use ($bank) {
-                CreateBankFileJob::dispatch($this->raport, $bank, $recipients->values());
+                CreateBankFileJob::dispatchSync($this->raport, $bank, $recipients->values());
             });
     }
 }

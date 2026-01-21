@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class FileFactory extends Factory
@@ -18,9 +19,14 @@ class FileFactory extends Factory
             'errors' => rand(0, 5)
                 ? []
                 : ['Файл содержит ошибки (тестовое сообщение)'],
-            'upload_at' => User::count() > 0
-                ? User::all()->random()->id
-                : null,
+            'upload_at' => null,
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (File $file) {
+            Storage::disk($file->disk)->put($file->path . '/' . $file->name, '');
+        });
     }
 }

@@ -35,7 +35,7 @@ abstract class BaseModel extends Model
     {
         $query = self::Filter();
 
-        $data = (request()->has('paginate') && request()->boolean('paginate'))
+        $data = (request()->has('paginate') and (int) request()->input('paginate') > 0)
             ? $query->paginate(request()->input('paginate'))
             : $query->get();
 
@@ -50,5 +50,12 @@ abstract class BaseModel extends Model
                     $query->where($column, $value);
             }
         })->get();
+    }
+
+    public static function randomOrCreate(array $attributes = [])
+    {
+        return self::count() > 0
+            ? self::all()->random()
+            : self::factory()->create($attributes);
     }
 }

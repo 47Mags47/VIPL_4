@@ -18,9 +18,7 @@ class PaymentRaportFactory extends Factory
     public function definition(): array
     {
         return [
-            'event_id' => PaymentEvent::count() > 0
-                ? PaymentEvent::all()->random()->id
-                : PaymentEvent::factory()->create()->id,
+            'event_id' => PaymentEvent::randomOrCreate()->id,
         ];
     }
 }
