@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Template;
+use App\Models\TemplateType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -21,7 +22,7 @@ class BankContractFactory extends Factory
         return [
             'number' => Str::random(rand(3, 15)),
             'signed_at' => now()->subDays(rand(0, 365))->format('Y-m-d'),
-            'template_id' => Template::randomOrCreate()->id,
+            'template_id' => Template::where('type_id', TemplateType::byCode('bankFile')->id)->get()->random()->id,
         ];
     }
 }

@@ -14,8 +14,9 @@ class BankContractSeeder extends Seeder
      */
     public function run(): void
     {
-        Template::where('type_id', TemplateType::byCode('bankFile')->id)->each(fn($template) => BankContract::factory()->create([
-            'template_id' => $template->id
-        ]));
+        Template::where('type_id', TemplateType::byCode('bankFile')->id)->get()
+            ->each(fn($template) => BankContract::factory()->create([
+                'template_id' => $template->id
+            ]));
     }
 }

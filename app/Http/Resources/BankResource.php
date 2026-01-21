@@ -17,6 +17,7 @@ class BankResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'code' => $this->code,
             'contract' => $this->contract->toResource()->jsonSerialize(),
         ];
     }

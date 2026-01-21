@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -33,27 +32,16 @@ class ServeConfig extends Command
         ##################################################
         $this->newLine();
         $this->line('Проверка наличия расширений php');
-        $extensions = ['Ctype', 'cURL', 'DOM', 'Fileinfo', 'Filter', 'Hash', 'Mbstring', 'OpenSSL', 'PCRE', 'PDO', 'Session', 'Tokenizer', 'XML'];
 
-        $flag = true;
-        $table_content = [];
-        foreach ($extensions as $extension) {
-            $has = in_array('ctype', get_loaded_extensions());
+        $required_extensions = collect(['ctype', 'curl', 'dom', 'fileinfo', 'filter', 'hash', 'mbstring', 'openssl', 'pcre', 'PDO', 'session', 'tokenizer', 'xml']);
+        $load_extensions = collect(get_loaded_extensions());
+        $missing_extensions = $required_extensions->diff($load_extensions);
 
-            if ($has) {
-                $table_content[] = [$extension, 'Загружен'];
-            } else {
-                $table_content[] = [$extension, 'Не загружен'];
-                $flag = false;
-            }
-        }
-
-        $this->table(['Расширение', 'Статус'], $table_content);
-
-        if (!$flag) {
-            $this->error('Некоторые расширения не загружены');
+        if ($missing_extensions->count() > 0) {
+            $this->error('Следующие расширения не загружены: ' . $missing_extensions->map(fn($extension) => '"' . $extension . '"')->implode(','));
             return;
-        }
+        } else
+            $this->info('Все расширения загружены');
 
         ### Create folders
         ##################################################
@@ -64,12 +52,15 @@ class ServeConfig extends Command
             ->filter(fn($disk) => $disk['driver'] === 'local');
 
         foreach ($disks as $disk => $data) {
-            $this->info('Проверка катога '. $disk);
-            if(!file_exists($data['root'])){
-                mkdir($data['root'], 775, true);
-                $this->info('Катог "'. $disk . '" создан');
-            }
+            $path = base_path() . '/' . $data['root'];
+
+            $this->components->task($disk . ': ' . $path, function () use ($path) {
+                if (!file_exists($path))
+                    mkdir($path, 775, true);
+            });
         }
+
+        dd('end');
 
         ### Folder permissions
         ##################################################
