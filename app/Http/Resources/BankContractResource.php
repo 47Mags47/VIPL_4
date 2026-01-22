@@ -20,7 +20,8 @@ class BankContractResource extends JsonResource
             'signed' => $this->signed_at->format('Y-m-d'),
             'template' => [
                 'id' => $this->template->id,
-                'name' => $this->template->name
+                'name' => $this->template->name,
+                'chunk' => $this->template->chunk,
             ],
         ];
     }
