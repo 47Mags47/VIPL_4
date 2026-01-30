@@ -16,5 +16,9 @@ class ProdSeeder extends Seeder
     {
         $this->call(Prod\TemplateTypeSeeder::class);
         $this->call(Prod\TemplateStyleSeeder::class);
+        $this->call(Prod\RoleSeeder::class);
+        $this->call(Prod\PermissionSeeder::class);
+        $this->call(Prod\RolePermissionSeeder::class);
+        $this->call(Prod\UserSeeder::class);
     }
 }

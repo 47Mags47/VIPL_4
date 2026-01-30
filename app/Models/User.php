@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Classes\BaseModel;
+use App\Traits\RoleAndPermissions;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -24,7 +25,7 @@ class User extends BaseModel implements
         CanResetPassword,
         MustVerifyEmail;
 
-    use HasFactory;
+    use HasFactory, RoleAndPermissions;
 
     ### Настройки
     ##################################################
@@ -32,8 +33,11 @@ class User extends BaseModel implements
         'first_name',
         'last_name',
         'middle_name',
+        'full_name',
+        'login',
         'email',
         'password',
+        'role_id',
     ];
 
     protected $hidden = [
