@@ -53,6 +53,9 @@ trait RoleAndPermissions
             ? $permission
             : Permission::byCode($permission);
 
-        return $this->permissions->merge($this->rolePermissions)->contains($permission);
+
+        return $this->role !== null
+            ? $this->permissions->merge($this->rolePermissions)->contains($permission)
+            : $this->permissions->contains($permission);
     }
 }

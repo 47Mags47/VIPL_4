@@ -9,10 +9,13 @@ class SessionController
 {
     public function store(StoreSessionRequest $request)
     {
-        if (Auth::attempt($request->only(['email', 'password']), $request->input('remember') ?? false))
+
+        $remember = $request->input('remember', false);
+
+        if (Auth::attempt($request->only(['email', 'password']), $remember) or Auth::attempt($request->only(['login', 'password']), $remember))
             return user()->toResource();
 
-        return back()->withErrors(['email' => 'Неверный логин или пароль'])->onlyInput('email');
+        return abort(401, 'Invalid credentials');
     }
 
     public function destroy()

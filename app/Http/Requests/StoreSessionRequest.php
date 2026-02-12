@@ -15,10 +15,11 @@ class StoreSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
-            'remember' => ['nullable'],
-            'division_id' => ['nullable', 'exists:' . Division::class . ',id']
+            'email'         => ['email'],
+            'login'         => ['required_without:email', 'string'],
+            'password'      => ['required', 'string'],
+            'remember'      => ['nullable'],
+            'division_id'   => ['nullable', 'exists:' . Division::class . ',id']
         ];
     }
 }

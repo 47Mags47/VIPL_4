@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Classes\BaseModel;
+use App\Policies\BankContractPolicy;
+use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[UsePolicy(BankContractPolicy::class)]
 class BankContract extends BaseModel
 {
     use HasFactory;

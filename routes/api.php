@@ -2,14 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->post('/session',                    [\App\Http\Controllers\SessionController::class, 'store'])->name('session.store');
-Route::middleware('auth')->delete('/session/destroy',           [\App\Http\Controllers\SessionController::class, 'destroy'])->name('session.destroy');
+Route::post('/sessions',                    [\App\Http\Controllers\SessionController::class, 'store'])->name('session.store');
 
-Route::middleware('auth')->get('/session/user-divisions',       [\App\Http\Controllers\SessionUserDivisionController::class, 'index'])->name('session.user-division.index');
-Route::middleware('auth')->post('/session/user-divisions',      [\App\Http\Controllers\SessionUserDivisionController::class, 'store'])->name('session.user-division.store');
+Route::delete('/sessions/destroy',           [\App\Http\Controllers\SessionController::class, 'destroy'])->name('session.destroy');
 
-Route::apiResource('banks',                     \App\Http\Controllers\BankController::class);
+Route::get('/sessions/user-divisions',       [\App\Http\Controllers\SessionUserDivisionController::class, 'index'])->name('session.user-division.index');
+Route::post('/sessions/user-divisions',      [\App\Http\Controllers\SessionUserDivisionController::class, 'store'])->name('session.user-division.store');
+
 Route::apiResource('bank-contracts',            \App\Http\Controllers\BankContractController::class);
+Route::apiResource('banks',                     \App\Http\Controllers\BankController::class);
 Route::apiResource('divisions',                 \App\Http\Controllers\DivisionController::class);
 Route::apiResource('payments',                  \App\Http\Controllers\PaymentController::class);
 Route::apiResource('payment-events',            \App\Http\Controllers\PaymentEventController::class);
