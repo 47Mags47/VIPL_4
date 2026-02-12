@@ -15,7 +15,7 @@ abstract class BaseModel extends Model
         return with(new static)->getTable();
     }
 
-    protected static function guessNames(?string $name = null): array| string| bool
+    protected static function getGuessNames(?string $name = null): array| string| bool
     {
         $modelClass = static::class;
 
@@ -48,8 +48,8 @@ abstract class BaseModel extends Model
 
     public function scopeFilter(Builder $builder): Builder
     {
-        return self::guessNames('filter')
-            ? new (self::guessNames('filter'))($builder)->apply()
+        return self::getGuessNames('filter')
+            ? new (self::getGuessNames('filter'))($builder)->apply()
             : new \App\Classes\Filter($builder)->apply();
     }
 
@@ -61,8 +61,8 @@ abstract class BaseModel extends Model
             ? $query->paginate(request()->input('paginate'))
             : $query->get();
 
-        return self::guessNames('resource')
-            ? self::guessNames('resource')::collection($data)
+        return self::getGuessNames('resource')
+            ? self::getGuessNames('resource')::collection($data)
             : $data->toResourceCollection();
     }
 
